@@ -10,14 +10,14 @@ public class Rider implements Runnable {
     public void run() {
         try {
             System.out.println("Rider " + this.rider_num + " Arrived");
-            SenateBus.rider_sem.wait();
-            
-            SenateBus.riders_count_sem.wait();
+            SenateBus.rider_sem.acquire();
+
+            SenateBus.riders_count_sem.acquire();
             System.out.println("Rider " + this.rider_num + " Waiting");
             SenateBus.riders_count++;
             SenateBus.riders_count_sem.release();
 
-            SenateBus.wait_for_bus_sem.wait();
+            SenateBus.wait_for_bus_sem.acquire();
 
             this.gettingonboard();
             SenateBus.rider_sem.release();
@@ -30,7 +30,7 @@ public class Rider implements Runnable {
 
     public void gettingonboard() {
         try {
-            SenateBus.riders_count_sem.wait();
+            SenateBus.riders_count_sem.acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
