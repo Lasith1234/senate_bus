@@ -25,6 +25,12 @@ public class SenateBus {
         Thread rider_gen = new Thread(new CreateRiderThreads(rider_arrival_mean_time));
         rider_gen.start();
 
+        // try {
+        //     Thread.sleep(3000); // Sleep for 3 seconds
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        // }
+
         Thread bus_gen = new Thread(new CreateBusThreads(bus_arrival_mean_time));
         bus_gen.start();
 
